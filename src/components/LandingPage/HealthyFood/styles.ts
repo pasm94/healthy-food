@@ -22,12 +22,21 @@ export const Container = styled.div`
 
   @media (max-width: 1080px) {
     min-height: 600px;
-    /* max-height: 700px; */
+  }
 
-    background-image: url('/components/LandingPage/HealthyFood/Illustration.svg');
-    background-repeat: no-repeat;
-    background-position: right 0;
-    background-size: 60%;
+  @media (max-width: 850px) {
+    min-height: 450px;
+    background-image: none;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 400px;
+    background-image: none;
+  }
+
+  @media (max-width: 360px) {
+    min-height: 350px;
+    background-image: none;
   }
 `;
 
@@ -50,6 +59,10 @@ export const Content = styled.div`
     margin-top: 14rem;
     line-height: 4rem;
     width: 25rem;
+
+    @media (max-width: 850px) {
+      margin-top: 5rem;
+    }
   }
 
   span#menu {
@@ -57,7 +70,6 @@ export const Content = styled.div`
     justify-content: space-between;
     margin-top: 1.5rem;
     margin-left: 10%;
-    margin-right: 10%;
     align-items: center;
 
     h2 {
@@ -73,6 +85,10 @@ export const Content = styled.div`
         font-weight: bold;
         font-size: 1rem;
 
+        @media (max-width: 850px) {
+          display: none;
+        }
+
         + a {
           margin-left: 2rem;
         }
@@ -84,6 +100,16 @@ export const Content = styled.div`
           color: #badc58;
           background-color: white;
           border-radius: 5px;
+          margin-right: 9rem;
+
+          @media (max-width: 1080px) {
+            margin-right: 4rem;
+          }
+
+          @media (max-width: 850px) {
+            color: white;
+            background-color: #badc58;
+          }
         }
 
         transition: filter 0.2s;
@@ -110,5 +136,52 @@ export const Content = styled.div`
       border-radius: 5px;
       margin-left: 1rem;
     }
+  }
+`;
+
+export const Bars = styled.div`
+  display: none;
+
+  @media (max-width: 850px) {
+    display: flex;
+    margin-right: 10%;
+    font-size: 3rem;
+
+    z-index: 200;
+  }
+
+  @media (max-width: 440px) {
+    display: flex;
+    margin-right: 8px;
+  }
+`;
+
+export const NavMobile = styled.nav`
+  background-color: rgba(1, 1, 1, 0.95);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  a {
+    font-size: 2.5rem;
+    text-decoration: line-through;
+    color: white;
+    font-family: 'Mulish', sans-serif;
+    font-weight: bold;
+    margin-top: 2rem;
+  }
+
+  a#register {
+    text-decoration: none;
+    background-color: #badc58;
+    border-radius: 5px;
+    padding: 1rem;
   }
 `;

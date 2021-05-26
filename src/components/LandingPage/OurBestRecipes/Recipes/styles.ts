@@ -2,7 +2,13 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   width: 33rem;
+
   height: 14rem;
+
+  @media (max-width: 480px) {
+    width: 29rem;
+    height: 12rem;
+  }
   background-color: white;
 
   display: flex;
