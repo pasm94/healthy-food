@@ -37,9 +37,6 @@ export function OurBestRecipes() {
             title='Cherry Cobbler on the Grill'
           />
         </Cards>
-        <h1>a</h1>
-        <h1>a</h1>
-        <h1>a</h1>
       </Content>
     </Container>
   );

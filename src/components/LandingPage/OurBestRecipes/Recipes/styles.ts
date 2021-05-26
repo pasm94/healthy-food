@@ -9,6 +9,12 @@ export const Container = styled.div`
     width: 29rem;
     height: 12rem;
   }
+
+  @media (max-width: 400px) {
+    width: 27rem;
+    height: 11rem;
+  }
+
   background-color: white;
 
   display: flex;
@@ -34,11 +40,6 @@ export const Container = styled.div`
       font-size: 1.5rem;
       color: #1d164d;
       margin-bottom: 1rem;
-    }
-
-    button {
-      padding: 1rem;
-      border-radius: 5px;
     }
 
     a {

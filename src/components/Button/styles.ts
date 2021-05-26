@@ -11,7 +11,9 @@ export const Container = styled.div`
     color: white;
     font-family: 'Mulish', sans-serif;
     font-size: 1rem;
-    font-weight: bold;
+
+    padding: 1rem;
+    border-radius: 5px;
 
     transition: filter 0.2s;
 

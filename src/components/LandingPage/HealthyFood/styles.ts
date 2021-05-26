@@ -11,7 +11,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1300px) {
-    min-height: 110vh;
+    min-height: 670px;
     /* max-height: 700px; */
 
     background-image: url('/components/LandingPage/HealthyFood/Illustration.svg');
@@ -62,6 +62,12 @@ export const Content = styled.div`
 
     @media (max-width: 850px) {
       margin-top: 5rem;
+      margin-left: 25%;
+    }
+
+    @media (max-width: 550px) {
+      margin-top: 5rem;
+      margin-left: 10%;
     }
   }
 
@@ -136,6 +142,14 @@ export const Content = styled.div`
       border-radius: 5px;
       margin-left: 1rem;
     }
+
+    @media (max-width: 850px) {
+      margin-left: 25%;
+    }
+
+    @media (max-width: 550px) {
+      margin-left: 10%;
+    }
   }
 `;
 
@@ -170,12 +184,12 @@ export const NavMobile = styled.nav`
   left: 0;
 
   a {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     text-decoration: line-through;
     color: white;
     font-family: 'Mulish', sans-serif;
     font-weight: bold;
-    margin-top: 2rem;
+    margin-top: 4rem;
   }
 
   a#register {

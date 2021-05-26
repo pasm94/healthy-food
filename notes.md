@@ -14,4 +14,5 @@
 
 - Add
   - [x] notifications
-  - [ ] mobile menu header
+  - [x] mobile menu header
+  - [ ] test in formulary and register button
