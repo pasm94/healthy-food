@@ -5,6 +5,7 @@ import { FaHome } from 'react-icons/fa';
 import React, { FormEvent, useState } from 'react';
 import { parseCookies, setCookie } from 'nookies';
 import Footer from '@/components/Footer';
+import Head from 'next/head';
 
 interface Address {
   cep: number;
@@ -84,6 +85,9 @@ export default function Register() {
 
   return (
     <>
+      <Head>
+        <title>Healthy Food | Register</title>
+      </Head>
       <Container>
         <span>
           <FaHome />

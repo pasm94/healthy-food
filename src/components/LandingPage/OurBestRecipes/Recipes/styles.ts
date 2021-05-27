@@ -40,6 +40,10 @@ export const Container = styled.div`
       font-size: 1.5rem;
       color: #1d164d;
       margin-bottom: 1rem;
+      @media (max-width: 480px) {
+        line-height: 2rem;
+        font-size: 1.4rem;
+      }
     }
 
     a {
