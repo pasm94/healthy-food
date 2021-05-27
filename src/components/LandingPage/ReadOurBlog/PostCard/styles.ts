@@ -5,6 +5,7 @@ export const Container = styled.div`
   width: 21.75rem;
   height: 28.125rem;
   background-color: white;
+  margin-bottom: 1rem;
 
   cursor: pointer;
 `;

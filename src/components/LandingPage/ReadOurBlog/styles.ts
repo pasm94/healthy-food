@@ -4,6 +4,24 @@ export const Container = styled.div`
   margin-top: 3rem;
   min-width: 100%;
   min-height: 768px;
+
+  @media (max-width: 1120px) {
+    min-height: 700px;
+  }
+
+  @media (max-width: 790px) {
+    min-height: 640px;
+  }
+
+  @media (max-width: 720px) {
+    min-height: 600px;
+  }
+
+  @media (max-width: 480px) {
+    min-height: 560px;
+  }
+
+  padding-bottom: 2rem;
 `;
 
 export const Content = styled.div`
