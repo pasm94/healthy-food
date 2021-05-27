@@ -1,5 +1,7 @@
 import HealthyFood from '@/components/LandingPage/HealthyFood';
+import JoinOurMembership from '@/components/LandingPage/JoinOurMembership';
 import OurBestRecipes from '@/components/LandingPage/OurBestRecipes';
+import ReadOurBlog from '@/components/LandingPage/ReadOurBlog';
 import TheBestServices from '@/components/LandingPage/TheBestServices';
 import { Container } from '@/styles/pages/LandingPage';
 import Head from 'next/head';
@@ -14,6 +16,8 @@ const LandingPage = () => {
       <HealthyFood />
       <OurBestRecipes />
       <TheBestServices />
+      <ReadOurBlog />
+      <JoinOurMembership />
     </Container>
   );
 };

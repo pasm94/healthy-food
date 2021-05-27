@@ -1,5 +1,9 @@
 import { GlobalStyle } from '@/styles/global';
 import Head from 'next/head';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import '@/components/LandingPage/ReadOurBlog/swiper.scss';
 
 function MyApp({ Component, pageProps }) {
   return (

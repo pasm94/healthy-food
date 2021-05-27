@@ -10,6 +10,12 @@
 
 - yarn add react-icons
 
+- yarn add swiper
+
+- yarn add scss
+
+- yarn add sass
+
 ## To do
 
 - Add
