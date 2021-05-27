@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import HealthyFood from '@/components/LandingPage/HealthyFood';
 import JoinOurMembership from '@/components/LandingPage/JoinOurMembership';
 import OurBestRecipes from '@/components/LandingPage/OurBestRecipes';
@@ -18,6 +19,7 @@ const LandingPage = () => {
       <TheBestServices />
       <ReadOurBlog />
       <JoinOurMembership />
+      <Footer />
     </Container>
   );
 };

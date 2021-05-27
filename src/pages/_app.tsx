@@ -4,6 +4,7 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import '@/components/LandingPage/ReadOurBlog/swiper.scss';
+import Footer from '@/components/Footer';
 
 function MyApp({ Component, pageProps }) {
   return (
