@@ -35,6 +35,16 @@ export const Container = styled.div`
   h1 {
     margin-bottom: 1rem;
     margin-top: 3rem;
+    @media (max-width: 594px) {
+      margin-top: 7rem;
+    }
+    @media (max-width: 480px) {
+      margin-top: 10rem;
+    }
+    @media (max-width: 360px) {
+      margin-top: 13rem;
+    }
+
     color: #1d164d;
     font-size: 2rem;
   }
