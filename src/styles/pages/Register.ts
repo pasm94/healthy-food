@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-image: url('/components/LandingPage/JoinOurMembership/bloco_final_image.svg');
   background-repeat: no-repeat;
   background-position: right 0;
+  min-height: 41rem;
 
   @media (max-width: 890px) {
     background-size: 40rem;
@@ -18,7 +19,6 @@ export const Container = styled.div`
   }
 
   max-width: 100vw;
-  height: 85vh;
   padding-top: 1rem;
 
   display: flex;
