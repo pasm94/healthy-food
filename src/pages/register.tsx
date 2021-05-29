@@ -6,6 +6,7 @@ import React, { FormEvent, useState } from 'react';
 import { parseCookies, setCookie } from 'nookies';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
+import * as Yup from 'yup';
 
 interface Address {
   cep: number;
@@ -16,71 +17,101 @@ interface Address {
 export default function Register() {
   const [name, setName] = useState('');
   const [birthday, setBirthday] = useState(new Date());
-  const [cpf, setCpf] = useState('');
-  const [cepp, setCepp] = useState<number | null>(null);
+  const [cpf, setCpf] = useState<number | ''>('');
+  const [inputCep, setInputCep] = useState<number | undefined | null>(null);
+  const [inputUf, setInputUf] = useState<string>('');
+  const [inputLocalidade, setInputLocalidade] = useState<string>('');
 
-  const [invalidData, setInvalidData] = useState(false);
+  const [isInvalidData, setIsInvalidData] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
   const [userAlreadyExists, setUserAlreadyExists] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
 
-  async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
-    setLoading(false);
-    setLoading(true);
-    setSuccess(false);
-
-    const { 'healthyfood.user': cookieUser } = parseCookies();
-
-    const registeredUser = JSON.parse(cookieUser);
-    if (registeredUser.cpf == cpf) {
-      setUserAlreadyExists(true);
-      setInvalidData(false);
-      setLoading(false);
-      return;
-    }
-
+  async function handleFindCep(cepValue: number) {
     let address: Address | null = null;
     try {
-      address = await fetch(`https://viacep.com.br/ws/${cepp}/json/`)
+      address = await fetch(`https://viacep.com.br/ws/${cepValue}/json/`)
         .then(response => response.json())
         .then(data => data);
-    } catch {
-      setInvalidData(true);
-      setUserAlreadyExists(false);
-      setLoading(false);
-      return;
-    }
+    } catch {}
 
-    setInvalidData(false);
-
-    if (!name || !birthday || !cpf) {
-      setInvalidData(true);
-      setLoading(false);
+    if (!address) {
       return;
     }
 
     const { cep, localidade, uf } = address;
 
-    const user = JSON.stringify({
+    setInputLocalidade(localidade);
+    setInputUf(uf);
+    setInputCep(cepValue);
+  }
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    try {
+      const schema = Yup.object().shape({
+        name: Yup.string().required(),
+        cpf: Yup.number()
+          .test(
+            'len',
+            'Must be exactly 11 characters',
+            val => val.toString().length === 11
+          )
+          .required(),
+        birthday: Yup.date().required().max(new Date()),
+        inputCep: Yup.number().required(),
+      });
+
+      await schema.validate(
+        {
+          name,
+          cpf,
+          birthday,
+          inputCep,
+        },
+        { abortEarly: false }
+      );
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        setIsInvalidData(true);
+        setIsRegistered(false);
+        setUserAlreadyExists(false);
+        return;
+      }
+    }
+
+    const { 'healthyfood.user': userFromCookies } = parseCookies();
+
+    if (userFromCookies) {
+      const registeredUser = JSON.parse(userFromCookies);
+      if (registeredUser.cpf === cpf) {
+        setUserAlreadyExists(true);
+        setIsInvalidData(false);
+        setIsRegistered(false);
+        return;
+      }
+    }
+
+    const userData = JSON.stringify({
       name,
       birthday,
       cpf,
-      cep,
-      localidade,
-      uf,
+      inputCep,
+      inputLocalidade: inputLocalidade ? inputLocalidade : '-',
+      inputUf: inputUf ? inputUf : '-',
     });
 
-    setCookie(undefined, 'healthyfood.user', user, {
+    setCookie(undefined, 'healthyfood.user', userData, {
       path: '/',
     });
 
     setName('');
     setBirthday(new Date());
     setCpf('');
-    setCepp(null);
-    setSuccess(true);
-    setLoading(false);
+    setInputCep(null);
+    setIsInvalidData(false);
+    setUserAlreadyExists(false);
+    setIsRegistered(true);
   }
 
   return (
@@ -94,6 +125,7 @@ export default function Register() {
           <a href='/'>Home Page</a>
         </span>
         <h1>Sign Up</h1>
+
         <Form onSubmit={handleSubmit}>
           <label>Name</label>
           <Input
@@ -114,6 +146,7 @@ export default function Register() {
           <label>CPF</label>
           <Input
             // required
+            type='number'
             placeholder='CPF'
             value={cpf}
             onChange={event => setCpf(event.target.value)}
@@ -124,15 +157,23 @@ export default function Register() {
             // required
             type='number'
             placeholder='CEP'
-            value={cepp}
-            onChange={event => setCepp(event.target.value)}
+            value={inputCep}
+            onChange={() => {}}
+            onBlur={event => handleFindCep(event.target.value)}
           />
 
-          <Button type='submit'>{loading ? 'One moment...' : 'Sign Up'}</Button>
+          <label>City</label>
+          <Input placeholder='City' value={inputLocalidade} readOnly />
+
+          <label>State</label>
+          <Input readOnly placeholder='State' value={inputUf} />
+
+          {/* <Button type='submit'>{loading ? 'One moment...' : 'Sign Up'}</Button> */}
+          <Button type='submit'>Sign Up</Button>
         </Form>
-        {invalidData && <h2>You must fill in the fields with valid data</h2>}
-        {userAlreadyExists && <h2>You are already registered</h2>}
-        {success && <h3>Successfully registered</h3>}
+        {isInvalidData && <h2>Invalid data.</h2>}
+        {isRegistered && <h3>You were registered!</h3>}
+        {userAlreadyExists && <h3>You are already registered!</h3>}
       </Container>
       <Footer />
     </>
